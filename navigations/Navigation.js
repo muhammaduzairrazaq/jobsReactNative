@@ -1,4 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import Feed from "./screens/tabScreens/Feed";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Settings from "./screens/tabScreens/Settings";
@@ -9,6 +9,8 @@ import TweetDetailsScreen from "./screens/homeStack/TweetDetailsScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Payments from "./screens/drawerScreens/Payments";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs"
+import { useColorScheme } from "react-native";
+import { StatusBar } from "expo-status-bar";
  
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
@@ -97,8 +99,12 @@ function DrawerGroup() {
 
 
 export default function Navigation() {
+  const currentTheme = useColorScheme();
   return (
-    <NavigationContainer>
+    <NavigationContainer
+    theme={currentTheme === "dark"? DarkTheme : DefaultTheme} 
+    >
+      <StatusBar style="auto" />
       <DrawerGroup />
     </NavigationContainer>
   );
