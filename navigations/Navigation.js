@@ -17,6 +17,7 @@ function HomeStackGroup() {
       <HomeStack.Screen
         name="TweetDetailsScreen"
         component={TweetDetailsScreen}
+        options={{ presentation: "modal" }}
       />
     </HomeStack.Navigator>
   );
