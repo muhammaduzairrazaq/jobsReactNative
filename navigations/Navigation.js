@@ -13,9 +13,12 @@ const HomeStack = createStackNavigator();
 function HomeStackGroup() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Feed" component={ Feed } />
-      <HomeStack.Screen name="TweetDetailsScreen" component={ TweetDetailsScreen } />
-      </HomeStack.Navigator>
+      <HomeStack.Screen name="Feed" component={Feed} />
+      <HomeStack.Screen
+        name="TweetDetailsScreen"
+        component={TweetDetailsScreen}
+      />
+    </HomeStack.Navigator>
   );
 }
 
@@ -25,7 +28,7 @@ function TabGroup() {
       screenOptions={({ route, navigation }) => ({
         tabBarIcon: ({ color, focused, size }) => {
           let iconName;
-          if (route.name === "Feed") {
+          if (route.name === "HomeStackGroup") {
             iconName = focused ? "home" : "home-outline";
           } else if (route.name === "Settings") {
             iconName = focused ? "settings" : "settings-outline";
@@ -38,7 +41,11 @@ function TabGroup() {
         tabBarInactiveTintColor: "#ccc",
       })}
     >
-      <Tab.Screen name="HomeStackGroup" component={HomeStackGroup} />
+      <Tab.Screen
+        name="HomeStackGroup"
+        component={HomeStackGroup}
+        options={{ headerShown: false, tabBarLabel: "@uzair" }}
+      />
       <Tab.Screen name="Notifications" component={Notifications} />
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
