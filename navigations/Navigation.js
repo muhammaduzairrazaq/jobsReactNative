@@ -4,8 +4,20 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Settings from "./screens/tabScreens/Settings";
 import Notifications from "./screens/tabScreens/Notifications";
 import { Ionicons } from "@expo/vector-icons";
+import { createStackNavigator } from "@react-navigation/stack";
+import TweetDetailsScreen from "./screens/homeStack/TweetDetailsScreen";
 
 const Tab = createBottomTabNavigator();
+const HomeStack = createStackNavigator();
+
+function HomeStackGroup() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Feed" component={ Feed } />
+      <HomeStack.Screen name="TweetDetailsScreen" component={ TweetDetailsScreen } />
+      </HomeStack.Navigator>
+  );
+}
 
 function TabGroup() {
   return (
@@ -26,7 +38,7 @@ function TabGroup() {
         tabBarInactiveTintColor: "#ccc",
       })}
     >
-      <Tab.Screen name="Feed" component={Feed} />
+      <Tab.Screen name="HomeStackGroup" component={HomeStackGroup} />
       <Tab.Screen name="Notifications" component={Notifications} />
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
