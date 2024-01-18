@@ -7,7 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import TweetDetailsScreen from "./screens/homeStack/TweetDetailsScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
+import Payments from "./screens/drawerScreens/Payments";
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
@@ -15,8 +15,10 @@ const HomeStack = createStackNavigator();
 function HomeStackGroup() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="TabGroup" component={TabGroup}
-      options={{ headerShown: false }} 
+      <HomeStack.Screen
+        name="TabGroup"
+        component={TabGroup}
+        options={{ headerShown: false }}
       />
       <HomeStack.Screen
         name="TweetDetailsScreen"
@@ -57,10 +59,21 @@ function TabGroup() {
   );
 }
 
+const Drawer = createDrawerNavigator();
+
+function DrawerGroup() {
+  return (
+    <Drawer.Navigator screenOptions={{ headerShown: false }}>
+      <Drawer.Screen name="HomeStackGroup" component={HomeStackGroup} />
+      <Drawer.Screen name="Payments" component={Payments} options={{ headerShown: true }} />
+    </Drawer.Navigator> 
+  );
+}
+
 export default function Navigation() {
   return (
     <NavigationContainer>
-      <HomeStackGroup />
+      <DrawerGroup />
     </NavigationContainer>
   );
 }
