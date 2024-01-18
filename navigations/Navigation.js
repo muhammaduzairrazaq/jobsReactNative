@@ -8,9 +8,33 @@ import { createStackNavigator } from "@react-navigation/stack";
 import TweetDetailsScreen from "./screens/homeStack/TweetDetailsScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Payments from "./screens/drawerScreens/Payments";
-
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs"
+ 
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
+
+const TopTabs = createMaterialTopTabNavigator();
+function TopTabsGroup() {
+  return(
+    <TopTabs.Navigator
+    screenOptions={{
+      tabBarLabelStyle: {
+        textTransform: "capitalize",
+        fontWeight: "bold",
+      },
+      tabBarIndicatorStyle: {
+        height: 5,
+        borderRadius: 5,
+        backgroundColor: "#1DA1F2",
+      }
+    }}
+    >
+      <TopTabs.Screen name="main" component={Feed} />
+      <TopTabs.Screen name="Following" component={Payments} />
+      <TopTabs.Screen name="Following2" component={Payments} />
+    </TopTabs.Navigator>
+  )
+}
 
 function HomeStackGroup() {
   return (
@@ -50,7 +74,7 @@ function TabGroup() {
     >
       <Tab.Screen
         name="Feed"
-        component={Feed}
+        component={TopTabsGroup}
         options={{ headerShown: true, tabBarLabel: "Home" }}
       />
       <Tab.Screen name="Notifications" component={Notifications} />
@@ -69,6 +93,8 @@ function DrawerGroup() {
     </Drawer.Navigator> 
   );
 }
+
+
 
 export default function Navigation() {
   return (
