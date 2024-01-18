@@ -6,6 +6,8 @@ import Notifications from "./screens/tabScreens/Notifications";
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import TweetDetailsScreen from "./screens/homeStack/TweetDetailsScreen";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
@@ -13,7 +15,9 @@ const HomeStack = createStackNavigator();
 function HomeStackGroup() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Feed" component={Feed} />
+      <HomeStack.Screen name="TabGroup" component={TabGroup}
+      options={{ headerShown: false }} 
+      />
       <HomeStack.Screen
         name="TweetDetailsScreen"
         component={TweetDetailsScreen}
@@ -29,7 +33,7 @@ function TabGroup() {
       screenOptions={({ route, navigation }) => ({
         tabBarIcon: ({ color, focused, size }) => {
           let iconName;
-          if (route.name === "HomeStackGroup") {
+          if (route.name === "Feed") {
             iconName = focused ? "home" : "home-outline";
           } else if (route.name === "Settings") {
             iconName = focused ? "settings" : "settings-outline";
@@ -43,9 +47,9 @@ function TabGroup() {
       })}
     >
       <Tab.Screen
-        name="HomeStackGroup"
-        component={HomeStackGroup}
-        options={{ headerShown: false, tabBarLabel: "@uzair" }}
+        name="Feed"
+        component={Feed}
+        options={{ headerShown: true, tabBarLabel: "Home" }}
       />
       <Tab.Screen name="Notifications" component={Notifications} />
       <Tab.Screen name="Settings" component={Settings} />
@@ -56,7 +60,7 @@ function TabGroup() {
 export default function Navigation() {
   return (
     <NavigationContainer>
-      <TabGroup />
+      <HomeStackGroup />
     </NavigationContainer>
   );
 }
